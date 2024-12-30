@@ -1,22 +1,6 @@
-//Audio Alarm
-let audioAlarm = {
-    Pomodoro: {
-        language: {
-            English: {
-                play: 'assets/audio alerts/Pomodoro/English/EnglishPlay.mp3',
-                break: 'assets/audio alerts/Pomodoro/English/EnglishBreak.mp3',
-            },
-            Tagalog: {
-                play: 'assets/audio alerts/Pomodoro/Tagalog/TagalogPlay.mp3',
-                break: 'assets/audio alerts/Pomodoro/Tagalog/TagalogBreak.mp3',
-            },
-            Iloco: {
-                play: 'assets/audio alerts/Pomodoro/Iloco/IlocoPlay.mp3',
-                break: 'assets/audio alerts/Pomodoro/Iloco/IlocoBreak.mp3',
-            },
-        },
-    },
+let oro_PomLib = {
     Orodomop: {
+        name: 'Orodomop',
         language: {
             English: {
                 play: 'assets/audio alerts/Orodomop/English/EnglishPlay.mp3',
@@ -32,21 +16,57 @@ let audioAlarm = {
             },
         },
     },
+    Pomodoro: {
+        name: 'Pomodoro',
+        language: {
+            English: {
+                play: 'assets/audio alerts/Pomodoro/English/EnglishPlay.mp3',
+                break: 'assets/audio alerts/Pomodoro/English/EnglishBreak.mp3',
+            },
+            Tagalog: {
+                play: 'assets/audio alerts/Pomodoro/Tagalog/TagalogPlay.mp3',
+                break: 'assets/audio alerts/Pomodoro/Tagalog/TagalogBreak.mp3',
+            },
+            Iloco: {
+                play: 'assets/audio alerts/Pomodoro/Iloco/IlocoPlay.mp3',
+                break: 'assets/audio alerts/Pomodoro/Iloco/IlocoBreak.mp3',
+            },
+        },
+    },
 }
 
-console.log(audioAlarm.Pomodoro.language.English.play);
-
-//Control Buttons
+// All Elements
+const audio = document.getElementById('audio');
 const playButton = document.getElementById('play');
 const pauseButton = document.getElementById('pause');
 const stopButton = document.getElementById('stop');
 const timer = document.getElementById('timer');
 const timerType = document.getElementById('timer-type');
+const languageSelector = document.getElementById('Language');
+const oro_pomSwitch = document.getElementById('oro-pom-switch');
+
+//Orodomop / Pomodoro Switch Handler
+let oro_pomSwitchState;
+const changeState = () => {
+    if (!oro_pomSwitch.checked) {
+        oro_pomSwitchState = oro_PomLib.Orodomop;
+    } else {
+        oro_pomSwitchState = oro_PomLib.Pomodoro;
+    };
+    console.log(oro_pomSwitchState.name);
+}
+
+//Language Selected Handler
+let languageSelected = 'English';
+const changeAlertLanguage = () => {
+    languageSelected = languageSelector.value;
+    console.log(languageSelected);
+}
 
 //Timer Logic
-const pomodoroTime = 10;
+const oro_pomTime = 10;
 const shortBreakTime = 10;
-let timeLeft = pomodoroTime;
+let timeLeft = oro_pomTime;
 let interval;
 
 const updateTimer = () => {
@@ -57,19 +77,21 @@ const updateTimer = () => {
     `;
 }
 
-const startPomodoroTimer = () => {
-    timerType.innerHTML = "Pomodoro"
-    timeLeft = pomodoroTime;
-    interval = setInterval(() => {
-        timeLeft--;
-        updateTimer();
-
-        if (timeLeft === 0) {
-            clearInterval(interval);
-            startShortBreakTimer();
-            updateTimer();
+const playAlertAudio = (timerTypeDone) => {
+    if (timerTypeDone === 'oro_pomDone') {
+        switch (languageSelected) {
+            case 'English':
+                audio.src = oro_pomSwitchState.language.English.break;
+                break;
+            case 'Tagalog':
+                audio.src = oro_pomSwitchState.language.Tagalog.break;
+                break;
+            case 'Iloco':
+                audio.src = oro_pomSwitchState.language.Iloco.break;
+                break;
         }
-    }, 1000);
+        audio.play();
+    }
 }
 
 const startShortBreakTimer = () => {
@@ -81,27 +103,46 @@ const startShortBreakTimer = () => {
 
         if (timeLeft === 0) {
             clearInterval(interval);
-            timerType.innerHTML = "Pomodoro"
-            timeLeft = pomodoroTime;
+            timerType.innerHTML = oro_pomSwitchState.name;
+            timeLeft = oro_pomTime;
             updateTimer();
         }
     }, 1000);
 }
 
-const pauseTimer = () => clearInterval(interval);
+const startOro_PomTimer = () => {
+    console.log(oro_pomSwitchState.name)
+    playButton.removeEventListener('click', startOro_PomTimer);
+    timerType.innerHTML = oro_pomSwitchState.name;
+    timeLeft = oro_pomTime;
+    interval = setInterval(() => {
+        timeLeft--;
+        updateTimer();
 
-const stopTimer = () => {
-    clearInterval(interval);
-    timeLeft = 1500;
-    updateTimer();
+        if (timeLeft === 0) {
+            clearInterval(interval);
+            playAlertAudio('oro_pomDone');
+            startShortBreakTimer();
+            updateTimer();
+        }
+    }, 1000);
 }
 
-playButton.addEventListener('click', startPomodoroTimer);
-pauseButton.addEventListener('click', pauseTimer);
-stopButton.addEventListener('click', stopTimer);
+playButton.addEventListener('click', startOro_PomTimer);
 
-const languageSelected = document.getElementById('Language');
+pauseButton.addEventListener(
+    'click',
+    pauseTimer = () => {
+        clearInterval(interval);
+        playButton.addEventListener('click', startOro_PomTimer);
+    }
+);
 
-//console.log(languageSelected.value);
-
-const changeAlertVoice = () => { alert(`The voice that reminds you should be in ${language.value}`) }
+stopButton.addEventListener(
+    'click',
+    stopTimer = () => {
+        clearInterval(interval);
+        playButton.addEventListener('click', startOro_PomTimer);
+        timeLeft = oro_pomTime;
+        updateTimer();
+    });
