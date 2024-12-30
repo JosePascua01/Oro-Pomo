@@ -4,22 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css" /  >
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="toggleSwitch.css" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-  <title>Orodomop</title>
+  <title>Pomodoro</title>
 </head>
 
 <body>
-  <header>
-    <h1>Orodomop</h1>
-    <p>Study Hard, Play Harder</p>
+  <header id="title">
+    <h1>Pomodoro</h1>
+    <p>Focus, Break, Repeat</p>
+    <!-- <input type="checkbox" class="theme-checkbox"> -->
   </header>
   <main>
     <section id="Clock">
-      <i class="ri-play-large-fill"></i>
-      Insert Clock Here!
+      <div id="clock-container">
+
+        <h1 id="timer">
+          25:00
+        </h1>
+        <p id="timer-type">
+          Pomodoro
+        </p>
+
+        <div id="button-wrapper">
+          <button id="play" class="clock-controls">
+            <i class="ri-play-large-fill"></i>
+          </button>
+          <button id="pause" class="clock-controls">
+            <i class="ri-pause-large-fill"></i>
+          </button>
+          <button id="stop" class="clock-controls">
+            <i class="ri-stop-large-fill"></i>
+          </button>
+        </div>
+        <!--end of button wrapper-->
+      </div>
+      <!--end of clock container-->
     </section>
-    <section id="LanguageSection">
+    <!--end of clock section-->
+    <section id="language-selection">
       <label for="Language">Language</label>
       <select name="Language" id="Language" onchange="changeVoice()">
         <option value="English" default>English</option>
@@ -27,6 +51,7 @@
         <option value="Tagalog">Tagalog</option>
       </select>
     </section>
+    <!--end of Language Section-->
   </main>
   <footer>
     Copyright © 2024. Joelo Pascua, All rights reserved.
