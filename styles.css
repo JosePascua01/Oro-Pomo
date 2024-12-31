@@ -17,12 +17,18 @@ body {
     align-items: center;
 }
 
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header h1 {
     margin: 0;
     padding: 0;
     width: auto;
     height: auto;
-    font-size: 24rem;
+    font-size: 48rem;
     display: flex;
     place-self: center;
 }
@@ -32,13 +38,43 @@ header p {
     padding: 0;
     width: auto;
     height: auto;
-    font-size: 12rem;
+    font-size: 24rem;
     display: flex;
     place-self: center;
 }
 
 main{
     font-size: 12rem;
+}
+
+section#Clock{
+    direction: flex;
+    flex-direction: column;
+}
+
+main div#clock-container{
+    display: flex;
+    flex-direction: column;
+}
+
+main h1#timer{
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-size: 125rem;
+    line-height: 1;
+}
+
+main div#button-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+main p#timer-type{
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 section#LanguageSection {
