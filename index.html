@@ -15,17 +15,19 @@
   <header id="title">
     <h1>Orodomop</h1>
     <p>Rest, Break, Repeat</p>
-    <input id="oro-pom-switch" onchange="changeState()" type="checkbox" class="theme-checkbox">
+    <!-- /* From Uiverse.io by andrew-demchenk0 */  -->
+    <div class="toggle-switch">
+      <input class="toggle-input" id="oro-pom-switch" type="checkbox" onchange="changeState()">
+      <label class="toggle-label" for="oro-pom-switch"></label>
+    </div>
   </header>
   <main>
     <section id="Clock">
-      <div id="clock-container">
 
         <h1 id="timer">
           25:00
         </h1>
         <p id="timer-type">
-          Orodomop
         </p>
 
         <div id="button-wrapper">
@@ -40,13 +42,12 @@
           </button>
         </div>
         <!--end of button wrapper-->
-      </div>
-      <!--end of clock container-->
+
     </section>
     <!--end of clock section-->
     <section id="language-selection">
       <label for="Language">Language</label>
-      <select name="Language" id="Language" onchange="changeAlertLanguage()">
+      <select name="Language" id="Language" onchange="changeAudioLanguage()">
         <option value="English" default>English</option>
         <option value="Tagalog">Tagalog</option>
         <option value="Iloco">Iloco</option>
