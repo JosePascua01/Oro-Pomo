@@ -13,11 +13,12 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-header{
+header {
+    margin:5vh 0 0 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,72 +26,81 @@ header{
 
 header h1 {
     margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
-    font-size: 48rem;
-    display: flex;
-    place-self: center;
+    font-size: 40rem;
+    text-align: center;
 }
 
 header p {
     margin: 0;
-    padding: 0;
-    width: auto;
+    font-size: 16rem;
+    text-align: center;
+}
+
+main {
     height: auto;
-    font-size: 24rem;
+    font-size: 16rem;
     display: flex;
-    place-self: center;
-}
-
-main{
-    font-size: 12rem;
-}
-
-section#Clock{
-    direction: flex;
+    flex: 1;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-main div#clock-container{
-    display: flex;
-    flex-direction: column;
-}
-
-main h1#timer{
+section#Clock {
     margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
-    font-size: 125rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1#timer {
+    margin: 0;
+    font-size: 100rem;
     line-height: 1;
+    text-align: center;
 }
 
-main div#button-wrapper{
+p#timer-type {
+    margin: 0;
+    font-size: 16rem;
+}
+
+div#button-wrapper {
+    margin: 35px 0 35px 0;
     display: flex;
-    flex-direction: row;
 }
 
-main p#timer-type{
+button{
+    width: 48px;
+    height: 48px;
+    margin: 5px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button i{
     margin: 0;
     padding: 0;
-    border: 0;
+    font-size: 22rem;
 }
 
 section#LanguageSection {
-    width: auto;
-    height: auto;
-    font-size: 12rem;
+    font-size: 16rem;
     text-align: center;
-    display: block;
+}
+
+select{
+    height: 48px;
+    border-radius: 12px;
+    font-size: 16rem;
+    text-align: center;
 }
 
 footer {
-    width: auto;
-    height: auto;
     font-size: 12rem;
     text-align: center;
-    display: block;
     position: absolute;
     bottom: 10px;
 }

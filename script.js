@@ -54,6 +54,7 @@ const stopButton = document.getElementById('stop');
 const timer = document.getElementById('timer');
 const timerType = document.getElementById('timer-type');
 const languageSelector = document.getElementById('Language');
+const buttons = document.querySelectorAll('button');
 
 //Setup Initial values for triggers
 let oro_pomSwitchState = 0;
@@ -65,17 +66,29 @@ window.addEventListener(
     'load',
     (event) => {
         oro_pomSwitchState = Number(oro_pomSwitch.checked);
-        const { name, catchphrase, colorscheme, language } = oro_pomLib[oro_pomSwitchState];
+        const { name, catchphrase, colorscheme, } = oro_pomLib[oro_pomSwitchState];
         document.querySelector('body').style.backgroundColor = colorscheme.background;
         document.querySelector('body').style.color = colorscheme.text;
         document.querySelector('title').innerText = name;
         document.querySelector('header h1').innerText = name;
         document.querySelector('header p').innerText = catchphrase;
+        buttons.forEach((button) => {
+            button.style.background = `${colorscheme.background}`;
+            button.style.color = `${colorscheme.text}`;
+            button.style.border = `2px solid ${colorscheme.text}`;
+            button.style.boxShadow = `5px 5px 
+            ${Number(oro_pomSwitchState) === 0 ? `rgba(205,205,205,0.5)` : `rgba(50, 50, 50, 0.5)`}
+            `
+        })
+        document.querySelector('select').style.border = `2px solid ${colorscheme.text}`;
+        document.querySelector('select').style.background = `${colorscheme.background}`;
+        document.querySelector('select').style.color = `${colorscheme.text}`;
+
         playButton.style.display = 'flex';
         pauseButton.style.display = 'none';
         stopButton.style.display = 'none';
-
         timerType.innerText = name;
+        //console.log(document.querySelector('header').getBoundingClientRect().left)
     })
 
 //Orodomop / Pomodoro Switch Handler
@@ -88,6 +101,17 @@ const changeState = () => {
     document.querySelector('header h1').innerText = name;
     document.querySelector('header p').innerText = catchphrase;
     timerType.innerText = name;
+    buttons.forEach((button) => {
+        button.style.background = `${colorscheme.background}`;
+        button.style.color = `${colorscheme.text}`;
+        button.style.border = `2px solid ${colorscheme.text}`;
+        button.style.boxShadow = `5px 5px 
+        ${Number(oro_pomSwitchState) === 0 ? `rgba(205,205,205,0.5)` : `rgba(50, 50, 50, 0.5)`}
+        `
+    })
+    document.querySelector('select').style.border = `2px solid ${colorscheme.text}`;
+    document.querySelector('select').style.background = `${colorscheme.background}`;
+    document.querySelector('select').style.color = `${colorscheme.text}`;
 }
 
 const playAlertAudio = (timerTypeDone) => {
@@ -151,11 +175,11 @@ const startShortBreakTimer = () => {
         updateTimer();
 
         if (timeLeft === 0) {
+            timeLeft = oro_pomTime;
             clearInterval(interval);
             playAlertAudio('shortBreakDone');
             updateTimer();
             timerType.innerHTML = oro_pomLib[oro_pomSwitchState].name;
-            timeLeft = oro_pomTime;
             playButton.style.display = 'block';
             pauseButton.style.display = 'none';
             stopButton.style.display = 'none';
@@ -240,7 +264,7 @@ stopButton.addEventListener(
         }
         clearInterval(interval);
         updateTimer();
-});
+    });
 
 /*
       _______
@@ -256,4 +280,5 @@ stopButton.addEventListener(
    \\_________//
       //   \\
      //     \\
+
 */
