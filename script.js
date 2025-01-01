@@ -151,8 +151,8 @@ const changeAudioLanguage = () => {
 }
 
 //Timer Logic
-const oro_pomTime = 10;
-const shortBreakTime = 5;
+const oro_pomTime = 1500;
+const shortBreakTime = 300;
 let timeLeft = oro_pomTime;
 let interval;
 
